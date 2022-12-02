@@ -12,23 +12,23 @@ if [ -z "${JAVA_OPTS}" ]; then
 	export JAVA_OPTS="-Djava.awt.headless=true -server -XX:TargetSurvivorRatio=75 -XX:SurvivorRatio=64 -XX:MaxTenuringThreshold=3 -XX:+UseG1GC -XX:+ScavengeBeforeFullGC -XX:ParallelGCThreads=4 -Xms1g -Xmx2g"
 fi
 
-echo "CATALINA_OPTS=\"$CATALINA_OPTS\"" > /usr/local/tomcat/bin/setenv.sh
-echo "JAVA_OPTS=\"$JAVA_OPTS\"" >> /usr/local/tomcat/bin/setenv.sh
+echo "CATALINA_OPTS=\"$CATALINA_OPTS\"" >/usr/local/tomcat/bin/setenv.sh
+echo "JAVA_OPTS=\"$JAVA_OPTS\"" >>/usr/local/tomcat/bin/setenv.sh
 
 if [ "${BUILD_GRAPHS}" = "True" ]; then
-  rm -rf ${graphs}/*
+	rm -rf ${graphs}/*
 fi
 echo "### openrouteservice configuration ###"
 # if Tomcat built before, copy the mounted ors-config.json to the Tomcat webapp ors-config.json, else copy it from the source
 if [ -d "/usr/local/tomcat/webapps/ors" ]; then
-  echo "Tomcat already built: Copying /ors-conf/ors-config.json to tomcat webapp folder"
+	echo "Tomcat already built: Copying /ors-conf/ors-config.json to tomcat webapp folder"
 	cp -f /ors-conf/ors-config.json $tomcat_ors_config
 else
 	if [ ! -f /ors-conf/ors-config.json ]; then
-	  echo "No ors-config.json in ors-conf folder. Copy config from ${source_ors_config}"
+		echo "No ors-config.json in ors-conf folder. Copy config from ${source_ors_config}"
 		cp -f $source_ors_config /ors-conf/ors-config.json
 	else
-	  echo "ors-config.json exists in ors-conf folder. Copy config to ${source_ors_config}"
+		echo "ors-config.json exists in ors-conf folder. Copy config to ${source_ors_config}"
 		cp -f /ors-conf/ors-config.json $source_ors_config
 	fi
 	echo "### Package openrouteservice and deploy to Tomcat ###"
