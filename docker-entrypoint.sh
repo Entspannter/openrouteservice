@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
-
 graphs=/ors-core/data/graphs
 tomcat_ors_config=/usr/local/tomcat/webapps/ors/WEB-INF/classes/ors-config.json
 source_ors_config=/ors-core/openrouteservice/src/main/resources/ors-config.json
-
 if [ -z "${CATALINA_OPTS}" ]; then
 	export CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9001 -Dcom.sun.management.jmxremote.rmi.port=9001 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=localhost"
 fi
@@ -37,6 +35,5 @@ else
 fi
 
 /usr/local/tomcat/bin/catalina.sh run
-
 # Keep docker running easy
 exec "$@"
