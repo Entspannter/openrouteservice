@@ -35,6 +35,7 @@ else
 	mvn -q -f /ors-core/openrouteservice/pom.xml package -DskipTests && \
 	cp -f /ors-core/openrouteservice/target/*.war /usr/local/tomcat/webapps/ors.war
 fi
+
 /usr/local/tomcat/bin/catalina.sh run
 
 # Keep docker running easy
